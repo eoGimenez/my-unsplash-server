@@ -1,6 +1,11 @@
 import express from 'express';
-import('./db');
+import { router as userRoutes } from './routes/user.routes.mjs';
+import('./db/index.mjs');
 
 const app = express();
 
-import('./config')(app);
+import('./config/index.mjs');
+
+app.use('/api/user', userRoutes);
+
+export { app };

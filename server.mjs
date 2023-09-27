@@ -1,6 +1,6 @@
-import { listen } from './app.mjs';
+import { app } from './app.mjs';
 const PORT = process.env.PORT ?? 5005;
 
-listen(PORT, () => {
+app.listen(PORT, () => {
 	console.log(`Server listening on http://localhost:${PORT}`);
 });
