@@ -1,4 +1,6 @@
-import { Express } from 'express';
+import express from 'express';
+import('./db');
 
+const app = express();
 
-const app = Express();
+import('./config')(app);
