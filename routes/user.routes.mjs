@@ -15,16 +15,24 @@ router.get('/', (req, res, next) => {
     .catch((err) => next(err))
 })
 
-router.get('/aa', (req, res, next) => {
-  res.send('<h1>aa hola</h1>')
+router.post('/', (req, res, next) => {
+  console.log(req.body)
+  const { label, imgUrl } = req.body
+  Image.create({
+    label,
+    imgUrl
+  })
+    .then((response) => {
+      res.status(201).json({ result: 'Created!', post: response })
+    })
+    .catch((err) => next(err))
 })
 
 router.post('/upload', fileUploader.single('image'), (req, res, next) => {
   if (!req.file) {
     next(new Error('No file uploaded! check the extentions'))
   }
-
-  req.status(201).json({ label: req.file.filename, imgUrl: req.file.path })
+  req.status(201).json({ imgUrl: req.file.path })
 })
 
 export { router }
