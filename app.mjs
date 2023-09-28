@@ -4,6 +4,7 @@ import { app as configureApp } from './config/index.mjs'
 import('./db/index.mjs')
 
 const app = express()
+app.disable('x-powered-by')
 
 configureApp(app)
 
