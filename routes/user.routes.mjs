@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
   const result = validateImage(req.body)
 
   if (result.error) {
-    return res.status(400).json({ error: result.error.message })
+    return res.status(400).json({ error: JSON.parse(result.error.message) })
   }
 
   Image.create({
