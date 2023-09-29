@@ -2,7 +2,7 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import { Image } from '../models/image.model.mjs'
 import { fileUploader } from '../config/cloudinary.config.mjs'
-import { validateImage } from '../schemas/image.mjs'
+import { validateImage, validatePartialImage } from '../schemas/image.mjs'
 
 const router = express.Router()
 
@@ -37,6 +37,20 @@ router.post('/', (req, res, next) => {
   })
     .then((response) => {
       res.status(201).json({ result: 'Created!', post: response })
+    })
+    .catch((err) => next(err))
+})
+
+router.patch('/:id', (req, res, next) => {
+  const { id } = req.params
+  const result = validatePartialImage(req.body)
+
+  if (result.error) {
+    return res.status(400).json({ error: JSON.parse(result.error.message) })
+  }
+  Image.findByIdAndUpdate(id, { ...result.data }, { new: true })
+    .then((response) => {
+      res.status(201).json({ result: 'Updated', post: response })
     })
     .catch((err) => next(err))
 })

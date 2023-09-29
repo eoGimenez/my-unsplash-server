@@ -15,4 +15,8 @@ const validateImage = (object) => {
   return imageSchema.safeParse(object)
 }
 
-export { validateImage }
+const validatePartialImage = (object) => {
+  return imageSchema.partial().safeParse(object)
+}
+
+export { validateImage, validatePartialImage }
