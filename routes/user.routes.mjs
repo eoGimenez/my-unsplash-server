@@ -2,6 +2,7 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import { Image } from '../models/image.model.mjs'
 import { fileUploader } from '../config/cloudinary.config.mjs'
+import { validateImage } from '../schemas/image.mjs'
 
 const router = express.Router()
 
@@ -9,7 +10,7 @@ const saltRounds = 10
 
 router.get('/', (req, res, next) => {
   // Pensar si vale la pena este filtro
-/*   const { label } = req.query
+  /*   const { label } = req.query
   if (label) {
     Image.findOne({ label })
       .then((response) => {
@@ -25,11 +26,14 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log(req.body)
-  const { label, imgUrl } = req.body
+  const result = validateImage(req.body)
+
+  if (result.error) {
+    return res.status(400).json({ error: result.error.message })
+  }
+
   Image.create({
-    label,
-    imgUrl
+    ...result.data
   })
     .then((response) => {
       res.status(201).json({ result: 'Created!', post: response })
