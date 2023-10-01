@@ -11,7 +11,6 @@ const router = express.Router()
 
 const USER_CODE = process.env.USER_CODE
 
-console.log('user', USER_CODE)
 router.get('/', (req, res, next) => {
   // Pensar si vale la pena este filtro
   /*   const { label } = req.query
@@ -62,7 +61,6 @@ router.patch('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params
   const result = validateCode(req.body)
-  console.log(USER_CODE, result.data.userCode)
   if (!bcrypt.compareSync(result.data.userCode, USER_CODE)) {
     return res.status(403).json({ error: 'Your user code is not correct !' })
   }
