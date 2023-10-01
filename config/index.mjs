@@ -2,9 +2,10 @@ import express from 'express'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const FRONTEND_URL = process.env.ORIGIN
-
 const app = (app) => {
   app.set('trust proxy', 1)
   app.use(
