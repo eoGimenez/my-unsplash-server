@@ -11,12 +11,12 @@ const imageSchema = z.object({
   })
 })
 
-const validateImage = (object) => {
+export const validateImage = (object) => {
   return imageSchema.safeParse(object)
 }
 
-const validatePartialImage = (object) => {
+export const validatePartialImage = (object) => {
   return imageSchema.partial().safeParse(object)
 }
 
-export { validateImage, validatePartialImage }
+// export { validateImage, validatePartialImage }

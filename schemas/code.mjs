@@ -7,8 +7,8 @@ const codeShcema = z.object({
   })
 })
 
-const validateCode = (userCode) => {
+export const validateCode = (userCode) => {
   return codeShcema.safeParse(userCode)
 }
 
-export { validateCode }
+// export { validateCode }
