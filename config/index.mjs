@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const FRONTEND_URL = process.env.ORIGIN
-const app = (app) => {
+export const app = (app) => {
   app.set('trust proxy', 1)
   app.use(
     cors({
@@ -19,4 +19,4 @@ const app = (app) => {
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
 }
-export { app }
+// export { app }

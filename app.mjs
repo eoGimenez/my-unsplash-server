@@ -5,11 +5,11 @@ import dotenv from 'dotenv'
 import('./db/index.mjs')
 dotenv.config()
 
-const app = express()
+export const app = express()
 app.disable('x-powered-by')
 
 configureApp(app)
 
 app.use('/api', userRoutes)
 
-export { app }
+// export { app }

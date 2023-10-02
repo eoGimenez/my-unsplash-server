@@ -16,6 +16,6 @@ const imageSchema = new Schema(
   }
 )
 
-const Image = model('Image', imageSchema)
+export const Image = model('Image', imageSchema)
 
-export { Image }
+// export { Image }
